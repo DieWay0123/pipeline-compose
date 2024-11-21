@@ -5,8 +5,8 @@ from pyspark.sql import functions as F
 from sklearn.model_selection import train_test_split
 
 if __name__ == '__main__':
-  spark = SparkSession.builder.appName('pyspark-process-heartDataset').getOrCreate()
-  df_data = spark.read.csv('/tmp/dataset/heart_2020_cleaned.csv', header=True, inferSchema=True)
+  spark = SparkSession.builder.appName('pyspark-process-heartDisease_Dataset').getOrCreate()
+  df_data = spark.read.csv('/tmp/dataset/heart_disease/heart_2020_cleaned.csv', header=True, inferSchema=True)
   df_data = df_data.drop('PhysicalHealth', 'MentalHealth', 'Race' , 'GenHealth')
   df_data.na.drop()
 
@@ -48,7 +48,7 @@ if __name__ == '__main__':
   x_train, x_test, y_train, y_test = train_test_split(df_data_x, df_data_y, test_size=0.2, random_state=42)
 
   x_train.to_csv('/tmp/processed_dataset/heart_disease/x_train.csv', header=True, index=False)
-  x_test.to_csv('/tmp/processed_dataset/<heart_diseasex_test.csv', header=True, index=False)
+  x_test.to_csv('/tmp/processed_dataset/heart_disease/x_test.csv', header=True, index=False)
   y_train.to_csv('/tmp/processed_dataset/heart_disease/y_train.csv', header=True, index=False)
   y_test.to_csv('/tmp/processed_dataset/heart_disease/y_test.csv', header=True, index=False)
   df_data.toPandas().to_csv('/tmp/processed_dataset/heart_disease/processed_heartDisease_dataset.csv', header=True, index=False)
